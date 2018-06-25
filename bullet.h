@@ -4,15 +4,20 @@
 #include "arena.h"
 #include <tgmath.h>
 #include <QGraphicsEllipseItem>
+#include <QObject>
 
-class bullet : public QGraphicsEllipseItem
+class bullet : public QGraphicsEllipseItem, public QObject
 {
 public:
     bullet();
     void move(double shipAngleIn);
     void bulletVelocity(float shipV);
+    void lifeTime();
+    ~bullet();
+public slots:
     void update();
 private:
+    double dt = 0;
     double bulletV = 0;
     double bulletX = 0;
     double bulletY = 0;
