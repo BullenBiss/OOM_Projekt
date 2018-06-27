@@ -23,5 +23,4 @@ void asteroids::update()
 asteroids::~asteroids()
 {
     this->setRect(0,0,0,0);
-    delete this;
 }

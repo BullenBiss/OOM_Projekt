@@ -49,7 +49,7 @@ bool bullet::active()
 
 bullet::~bullet()
 {
-    delete this;
+    delete timer;
 }
 
 void bullet::update()
