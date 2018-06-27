@@ -30,7 +30,8 @@ SOURCES += \
     game.cpp \
     ship.cpp \
     gameobject.cpp \
-    bullet.cpp
+    bullet.cpp \
+    asteroids.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +39,8 @@ HEADERS += \
     game.h \
     ship.h \
     gameobject.h \
-    bullet.h
+    bullet.h \
+    asteroids.h
 
 FORMS += \
         mainwindow.ui

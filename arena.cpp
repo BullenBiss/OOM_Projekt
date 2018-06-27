@@ -22,7 +22,7 @@ void arena::create()
     view->show();
 }
 
-void arena::bounds(ship *Ship)  //Skickar in ship-klass och definierar arenagränserna
+void arena::bounds(QGraphicsItem *Ship)  //Skickar in ship-klass och definierar arenagränserna
 {
     if(Ship->x() > sceneWidth/2)
     {
@@ -55,4 +55,9 @@ int arena::getHeight()
 void arena::addToScene(QGraphicsItem *item)
 {
     scene->addItem(item);
+}
+
+void arena::removeFromScene(QGraphicsItem *item)
+{
+    scene->removeItem(item);
 }

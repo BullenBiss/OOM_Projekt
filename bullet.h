@@ -12,12 +12,13 @@ public:
     bullet();
     void move(double shipAngleIn);
     void bulletVelocity(float shipV);
-    void lifeTime();
+    void activate();
+    bool active();
     ~bullet();
 public slots:
     void update();
 private:
-    double dt = 0;
+    double dt = 100;
     double bulletV = 0;
     double bulletX = 0;
     double bulletY = 0;
@@ -25,6 +26,8 @@ private:
     double blackholeAx = 0;
     double blackholeAy = 0;
     const double pi = 3.14159;
+    QTimer * timer = new QTimer();                              //Skapa timer
+
 };
 
 #endif // BULLET_H

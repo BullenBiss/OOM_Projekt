@@ -106,12 +106,9 @@ void ship::velocityVector()
         V = 0.05;
     }
 
-
-
     angleRad = (rotation() * pi)/180;     //Skriv om vinkeln till radianer
     Vy = sin(angleRad) * V;                     //Komposantuppdelning av V
     Vx = cos(angleRad) * V;                     //Komposantuppdelning av V
-
 
     VMx += Vx;                                  //Rörelsevektorn för skeppet. Simulerar 2 olika vektorer för skeppet
     if(VMx >= Vmax)
