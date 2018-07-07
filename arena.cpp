@@ -12,6 +12,11 @@ void arena::setResolution(int width, int height)
     sceneHeight = height;
 }
 
+arena::~arena()
+{
+    delete scene;
+}
+
 void arena::create()
 {
     QGraphicsView * view = new QGraphicsView(scene);

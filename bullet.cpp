@@ -31,14 +31,18 @@ void bullet::activate()
     this->setBrush(Qt::SolidPattern);
 }
 
+void bullet::deactivate()
+{
+    timer->stop();
+    this->setRect(0,0,0,0);
+    this->setOpacity(0.0);
+}
+
 bool bullet::active()
 {
     if(dt >= 100)
     {
-        timer->stop();
-        this->setRect(0,0,0,0);
-        this->setOpacity(0.0);
-        this->setBrush(Qt::SolidPattern);
+        this->deactivate();
         return false;
     }
     else

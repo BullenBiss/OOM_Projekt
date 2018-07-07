@@ -19,16 +19,20 @@ class game : public QObject
     Q_OBJECT
 public:
     game();
+    ~game();
     void initiate();
     void shootEvent();
     void asteroidUpdate();
+    void shipUpdate();
+    void bulletUpdate();
     bool collisionDetectionAsteroid(asteroids *asteroid);
+    bool collisionDetectionShip(ship *ship);
 public slots:
     void gameUpdate();
 private:
     double shotTimer = 0;
     bool shoot = false;
-    arena *Arena = new arena;
+    arena *Arena = new arena();
     ship *Ship1 = new ship;     //Skapar ship som sen kan användas i hela game klassen
     bullet *Bullet = new bullet[5];
     std::vector<asteroids*> asteroid;

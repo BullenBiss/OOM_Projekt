@@ -14,6 +14,7 @@ class arena : public QGraphicsScene
 public:
     arena();
     arena(int width, int height);
+    ~arena();
     void create(); //Lägg till ship2 när den ska implementeras
     void bounds(QGraphicsItem *Ship);
     void setResolution(int width, int height);
@@ -22,9 +23,9 @@ public:
     void addToScene(QGraphicsItem *item);
     void removeFromScene(QGraphicsItem *item);
 private:
-    int sceneWidth = 0;
-    int sceneHeight = 0;   //Lägger den här så att jag kan skapa en "addToScene" medlem
-    QGraphicsScene * scene = new QGraphicsScene;
+    int sceneWidth;
+    int sceneHeight;   //Lägger den här så att jag kan skapa en "addToScene" medlem
+    QGraphicsScene * scene = new QGraphicsScene(0,0,1920,1080);
 };
 
 #endif // ARENA_H

@@ -13,6 +13,7 @@ public:
     void move(double shipAngleIn);
     void bulletVelocity(float shipV);
     void activate();
+    void deactivate();
     bool active();
     ~bullet();
 public slots:
@@ -23,8 +24,6 @@ private:
     double bulletX = 0;
     double bulletY = 0;
     double shipAngle = 0;
-    double blackholeAx = 0;
-    double blackholeAy = 0;
     const double pi = 3.14159;
     QTimer * timer = new QTimer();                              //Skapa timer
 
