@@ -4,6 +4,9 @@
 
 ship::ship()
 {
+    this->spawn();
+    lives = 3;
+    score = 0;
 }
 
 void ship::keyPressEvent(QKeyEvent *event)                //Styr då knappen trycks in
@@ -63,6 +66,43 @@ void ship::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
+void ship::spawn()
+{
+    this->setRect(0,0,50,25);
+    this->setTransformOriginPoint(25,12.5);
+    this->setPos(-500,0);
+}
+
+void ship::addLife()
+{
+    lives++;
+}
+
+void ship::addScore()
+{
+    score += 10;
+}
+
+int ship::getScore()
+{
+    return score;
+}
+
+void ship::resetScore()
+{
+    score = 0;
+}
+
+void ship::looseLife()
+{
+    lives--;
+}
+
+int ship::getLife()
+{
+    return lives;
+}
+
 void ship::movement()                     //Tar in-tryckt flaggan och utför utan delayen
 {
 
@@ -95,7 +135,7 @@ void ship::movement()                     //Tar in-tryckt flaggan och utför uta
         V += acc;
         velocityVector();
     }
-
+    moveBy(VMx, VMy);
 }
 
 void ship::velocityVector()
@@ -157,7 +197,6 @@ double ship::getAngle()
 void ship::update()
 {
     movement();
-    moveBy(VMx, VMy);
     shoot();
     getAngle();
 }

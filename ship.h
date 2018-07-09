@@ -17,6 +17,13 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
     void velocityVector();
+    void spawn();
+    void addLife();
+    void addScore();
+    int getScore();
+    void resetScore();
+    void looseLife();
+    int getLife();
     float getVelocity();
     void movement();
     void update();
@@ -24,6 +31,8 @@ public:
     double getAngle();
     const float pi = 3.14159;
 protected:
+    int lives;
+    int score;
     float acc = 0.6;
     float Vx = 0;       //V komposant
     float Vy = 0;       //V komposant

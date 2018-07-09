@@ -8,6 +8,7 @@ game::game()
 
 game::~game()
 {
+    delete livesText;
     asteroid.clear();
     delete Ship1;
     delete Bullet;
@@ -17,9 +18,6 @@ game::~game()
 void game::initiate()
 {
     qDebug() << "initiate";
-    Ship1->setRect(0,0,50,25);
-    Ship1->setTransformOriginPoint(25,12.5);
-    Ship1->setPos(-500, 0);
 
     Arena->create();
     Arena->addToScene(Ship1);
@@ -30,6 +28,11 @@ void game::initiate()
     }
     Ship1->setFlag(QGraphicsItem::ItemIsFocusable);
     Ship1->setFocus();
+    livesText->position(Arena->getWidth()/3, -Arena->getHeight()/3);
+    scoreText->position((Arena->getWidth()/3), (-Arena->getHeight()/3)-100);
+
+    Arena->addToScene(livesText);
+    Arena->addToScene(scoreText);
 }
 
 void game::shootEvent()
@@ -81,6 +84,7 @@ void game::asteroidUpdate()
                 Arena->addToScene(asteroid.back());
             }
             asteroid.erase(asteroid.begin()+h);
+            Ship1->addScore();
         }
     }
 }
@@ -90,7 +94,14 @@ void game::shipUpdate()
     shootEvent();
     if(collisionDetectionShip(Ship1))
     {
+        Ship1->looseLife();
         Arena->removeFromScene(Ship1);
+        if(Ship1->getLife() > 0)
+        {
+            Ship1->spawn();
+            Arena->addToScene(Ship1);
+            Ship1->setFocus();
+        }
     }
 }
 
@@ -146,4 +157,6 @@ void game::gameUpdate()     //Timer som updaterar spelet.
     shotTimer++;
     asteroidUpdate();
     qDebug() << Ship1->x();
+    livesText->displayInt(Ship1->getLife());
+    scoreText->displayInt(Ship1->getScore());
 }

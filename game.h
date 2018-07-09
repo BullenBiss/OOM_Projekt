@@ -6,12 +6,14 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QList>
+#include <QString>
 #include <vector>
 #include "arena.h"
 #include "ship.h"
 #include "gameobject.h"
 #include "bullet.h"
 #include "asteroids.h"
+#include "gametext.h"
 
 
 class game : public QObject
@@ -36,6 +38,8 @@ private:
     ship *Ship1 = new ship;     //Skapar ship som sen kan användas i hela game klassen
     bullet *Bullet = new bullet[5];
     std::vector<asteroids*> asteroid;
+    gameText * livesText = new gameText;
+    gameText * scoreText = new gameText;
 };
 
 #endif // GAME_H
