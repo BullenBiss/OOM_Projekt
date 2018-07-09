@@ -2,27 +2,35 @@
 
 asteroids::asteroids()
 {
-    _scaleX = 100;
-    _scaleY = 100;
+    _scaleX = 150;
+    _scaleY = 150;
+    this->setTransformOriginPoint(_scaleX/2, _scaleY/2);
     this->randomPos();
     this->spawnAsteroid();
+
 }
 
 asteroids::asteroids(int x, int y, int scaleX, int scaleY)
 {
+    this->setTransformOriginPoint(_scaleX/2, _scaleY/2);
     this->setX(x);
     this->setY(y);
     _scaleX = scaleX;
     _scaleY = scaleY;
+    this->setTransformOriginPoint(_scaleX/2, _scaleY/2);
     this->spawnAsteroid();
 }
 
 void asteroids::spawnAsteroid()
 {
-    this->setRect(0,0,_scaleX,_scaleY);
-    this->setOpacity(1.0);
-    this->setBrush(Qt::SolidPattern);
+    QPixmap pixmap("C:/Users/Max Pettersson/Desktop/Skola/Objektorienterad mjukvaruutveckling/Projekt/Asteroid.png");
+    QPixmap scaled = pixmap.scaled(QSize(_scaleX, _scaleY));
+    this->setPixmap(scaled);
+    //this->setRect(0,0,_scaleX,_scaleY);
+    //this->setOpacity(1.0);
+    //this->setBrush(Qt::SolidPattern);
     this->randomVel();
+    this->randomRot();
 }
 
 int asteroids::getScaleX()
@@ -59,13 +67,20 @@ void asteroids::randomVel()
     }
 }
 
+void asteroids::randomRot()
+{
+    _randRot = (rand() % 4) - 2;
+}
 void asteroids::update()
 {
     this->moveBy(velocityX,velocityY);
+    this->setRotation(_rotation);
+    _rotation += _randRot;
 }
 
 
 asteroids::~asteroids()
 {
-    this->setRect(0,0,0,0);
+    //this->setRect(0,0,0,0);
+
 }

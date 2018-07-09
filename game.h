@@ -27,6 +27,7 @@ public:
     void asteroidUpdate();
     void shipUpdate();
     void bulletUpdate();
+    void textUpdate();
     bool collisionDetectionAsteroid(asteroids *asteroid);
     bool collisionDetectionShip(ship *ship);
 public slots:
@@ -38,8 +39,7 @@ private:
     ship *Ship1 = new ship;     //Skapar ship som sen kan användas i hela game klassen
     bullet *Bullet = new bullet[5];
     std::vector<asteroids*> asteroid;
-    gameText * livesText = new gameText;
-    gameText * scoreText = new gameText;
+    std::vector<gameText*> text;    //text[0] = lives, text[1] = score, text[2] = gameover
 };
 
 #endif // GAME_H

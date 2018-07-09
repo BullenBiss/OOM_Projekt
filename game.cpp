@@ -8,7 +8,7 @@ game::game()
 
 game::~game()
 {
-    delete livesText;
+    text.clear();
     asteroid.clear();
     delete Ship1;
     delete Bullet;
@@ -21,18 +21,23 @@ void game::initiate()
 
     Arena->create();
     Arena->addToScene(Ship1);
-    for(int n = 0; n <= 3; n++)
+    for(int n = 0; n <= 3; n++) //Create vector of asteroids
     {
         asteroid.push_back(new asteroids());
         Arena->addToScene(asteroid[n]);
     }
+
+    for(int i = 0; i <= 2; i++) //Create vector of text
+    {
+        text.push_back(new gameText());
+    }
+    Arena->addToScene(text[0]); //lives
+    Arena->addToScene(text[1]); //score
     Ship1->setFlag(QGraphicsItem::ItemIsFocusable);
     Ship1->setFocus();
-    livesText->position(Arena->getWidth()/3, -Arena->getHeight()/3);
-    scoreText->position((Arena->getWidth()/3), (-Arena->getHeight()/3)-100);
+    text[0]->position(Arena->getWidth()/3, -Arena->getHeight()/3);
+    text[1]->position((Arena->getWidth()/3), (-Arena->getHeight()/3)-100);
 
-    Arena->addToScene(livesText);
-    Arena->addToScene(scoreText);
 }
 
 void game::shootEvent()
@@ -76,7 +81,7 @@ void game::asteroidUpdate()
         if(collisionDetectionAsteroid(asteroid[h]))
         {
             Arena->removeFromScene(asteroid[h]);
-            if(asteroid[h]->getScaleX() > 25)
+            if(asteroid[h]->getScaleX() > 40)
             {
                 asteroid.push_back(new asteroids(asteroid[h]->x(), asteroid[h]->y(), asteroid[h]->getScaleX()/2, asteroid[h]->getScaleY()/2));
                 Arena->addToScene(asteroid.back());
@@ -99,8 +104,14 @@ void game::shipUpdate()
         if(Ship1->getLife() > 0)
         {
             Ship1->spawn();
+            Ship1->resetVelocity();
             Arena->addToScene(Ship1);
             Ship1->setFocus();
+        }
+        else if (Ship1->getLife()==0)
+        {
+            text[2]->gameOver();
+            Arena->addToScene(text[2]);
         }
     }
 }
@@ -112,6 +123,14 @@ void game::bulletUpdate()
         Bullet[j].update();
         Arena->bounds(&Bullet[j]);
     }
+}
+
+void game::textUpdate()
+{
+
+    text[0]->displayInt(Ship1->getLife());
+    text[1]->displayInt(Ship1->getScore());
+
 }
 
 bool game::collisionDetectionAsteroid(asteroids *asteroid)
@@ -157,6 +176,5 @@ void game::gameUpdate()     //Timer som updaterar spelet.
     shotTimer++;
     asteroidUpdate();
     qDebug() << Ship1->x();
-    livesText->displayInt(Ship1->getLife());
-    scoreText->displayInt(Ship1->getScore());
+    textUpdate();
 }

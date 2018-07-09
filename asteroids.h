@@ -3,8 +3,10 @@
 
 #include <QtWidgets>
 #include <time.h>
+#include <QGraphicsItem>
+#include <QPixmap>
 
-class asteroids : public QGraphicsEllipseItem
+class asteroids : public QGraphicsPixmapItem
 {
 public:
     asteroids();
@@ -14,6 +16,7 @@ public:
     int getScaleY();
     void randomPos();
     void randomVel();
+    void randomRot();
     void update();
     ~asteroids();
 private:
@@ -23,6 +26,8 @@ private:
     int _Y;
     int _scaleX;
     int _scaleY;
+    int _rotation, _randRot;
+
 };
 
 #endif // ASTEROIDS_H

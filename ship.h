@@ -25,6 +25,7 @@ public:
     void looseLife();
     int getLife();
     float getVelocity();
+    void resetVelocity();
     void movement();
     void update();
     bool shoot();

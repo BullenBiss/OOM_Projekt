@@ -177,13 +177,23 @@ void ship::velocityVector()
 
 float ship::getVelocity()
 {
-   return abs(VMx)+abs(VMy);
+    return abs(VMx)+abs(VMy);
+}
+
+void ship::resetVelocity()
+{
+    VMx = 0;
+    VMy = 0;
 }
 
 bool ship::shoot()
 {
     if(shootPress){
         return true;
+    }
+    else
+    {
+        return false;
     }
 }
 

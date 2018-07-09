@@ -3,6 +3,7 @@
 gameText::gameText()
 {
     this->setScale(5);
+    this->setTransformOriginPoint(this->boundingRect().center());
 }
 
 void gameText::displayInt(int integer)
@@ -18,4 +19,11 @@ void gameText::position(int x, int y)
 void gameText::textUpdate()
 {
 
+}
+
+void gameText::gameOver()
+{
+    this->setPos(-300,0);
+    this->setPlainText("Game Over\nPress ESC");
+    this->setScale(10);
 }
