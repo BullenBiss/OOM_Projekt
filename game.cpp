@@ -18,24 +18,30 @@ game::~game()
 void game::initiate()
 {
     qDebug() << "initiate";
-
+    wave = 1;
     Arena->create();
     this->addBackground();
     Arena->addToScene(Ship1);
 
-    this->spawnWave();
+    //this->spawnWave();
 
-    for(int i = 0; i <= 2; i++) //Create vector of text
+    for(int i = 0; i <= 4; i++) //Create vector of text
     {
         text.push_back(new gameText());
     }
     Arena->addToScene(text[0]); //lives
     Arena->addToScene(text[1]); //score
-    Ship1->setFlag(QGraphicsItem::ItemIsFocusable);
-    Ship1->setFocus();
+
     text[0]->position(Arena->getWidth()/3, -Arena->getHeight()/3);
     text[1]->position((-Arena->getWidth()/3), (-Arena->getHeight()/3));
 
+    text[2]->setPlainText("Wave");
+    text[2]->position(-300,0);
+
+    text[3]->position(0,0);
+
+    Ship1->setFlag(QGraphicsItem::ItemIsFocusable);
+    Ship1->setFocus();
 }
 
 
@@ -75,11 +81,18 @@ void game::asteroidUpdate()
 {
     if(asteroid.empty())
     {
+
+        text[3]->displayInt(wave);
+        Arena->addToScene(text[2]);
+        Arena->addToScene(text[3]);
         waveTimer++;
-        if(waveTimer == 100)
+        if(waveTimer == 200)
         {
+            wave++;
             spawnWave();
             waveTimer = 0;
+            Arena->removeFromScene(text[2]);
+            Arena->removeFromScene(text[3]);
         }
     }
 

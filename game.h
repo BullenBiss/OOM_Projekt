@@ -39,6 +39,7 @@ public slots:
 private:
     double shotTimer = 0;
     double waveTimer = 0;
+    int wave;
     bool shoot = false;
     arena *Arena = new arena();
     ship *Ship1 = new ship;     //Skapar ship som sen kan användas i hela game klassen
