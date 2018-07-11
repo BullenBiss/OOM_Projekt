@@ -4,6 +4,10 @@
 
 ship::ship()
 {
+    QPixmap pixmap("C:/Users/Max Pettersson/Desktop/Skola/Objektorienterad mjukvaruutveckling/Projekt/Spaceship.png");
+    QPixmap scaled = pixmap.scaled(QSize(scaleX, scaleY));
+    this->setPixmap(scaled);
+    this->setTransformOriginPoint(scaleX/2,scaleY/2);
     this->spawn();
     lives = 3;
     score = 0;
@@ -31,6 +35,11 @@ void ship::keyPressEvent(QKeyEvent *event)                //Styr då knappen try
         case Qt::Key_Space:
         {
             shootPress = true;
+            break;
+        }
+        case Qt::Key_Escape:
+        {
+            QApplication::quit();
             break;
         }
     }
@@ -68,8 +77,6 @@ void ship::keyReleaseEvent(QKeyEvent *event)
 
 void ship::spawn()
 {
-    this->setRect(0,0,50,25);
-    this->setTransformOriginPoint(25,12.5);
     this->setPos(-500,0);
 }
 

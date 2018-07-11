@@ -26,9 +26,6 @@ void asteroids::spawnAsteroid()
     QPixmap pixmap("C:/Users/Max Pettersson/Desktop/Skola/Objektorienterad mjukvaruutveckling/Projekt/Asteroid.png");
     QPixmap scaled = pixmap.scaled(QSize(_scaleX, _scaleY));
     this->setPixmap(scaled);
-    //this->setRect(0,0,_scaleX,_scaleY);
-    //this->setOpacity(1.0);
-    //this->setBrush(Qt::SolidPattern);
     this->randomVel();
     this->randomRot();
 }

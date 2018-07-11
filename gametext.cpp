@@ -3,6 +3,7 @@
 gameText::gameText()
 {
     this->setScale(5);
+    this->setDefaultTextColor(Qt::white);
     this->setTransformOriginPoint(this->boundingRect().center());
 }
 

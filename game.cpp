@@ -20,12 +20,10 @@ void game::initiate()
     qDebug() << "initiate";
 
     Arena->create();
+    this->addBackground();
     Arena->addToScene(Ship1);
-    for(int n = 0; n <= 3; n++) //Create vector of asteroids
-    {
-        asteroid.push_back(new asteroids());
-        Arena->addToScene(asteroid[n]);
-    }
+
+    this->spawnWave();
 
     for(int i = 0; i <= 2; i++) //Create vector of text
     {
@@ -36,9 +34,10 @@ void game::initiate()
     Ship1->setFlag(QGraphicsItem::ItemIsFocusable);
     Ship1->setFocus();
     text[0]->position(Arena->getWidth()/3, -Arena->getHeight()/3);
-    text[1]->position((Arena->getWidth()/3), (-Arena->getHeight()/3)-100);
+    text[1]->position((-Arena->getWidth()/3), (-Arena->getHeight()/3));
 
 }
+
 
 void game::shootEvent()
 {
@@ -74,6 +73,16 @@ void game::shootEvent()
 
 void game::asteroidUpdate()
 {
+    if(asteroid.empty())
+    {
+        waveTimer++;
+        if(waveTimer == 100)
+        {
+            spawnWave();
+            waveTimer = 0;
+        }
+    }
+
     for(int h = 0; h < asteroid.size(); h++)
     {
         asteroid[h]->update();
@@ -91,6 +100,15 @@ void game::asteroidUpdate()
             asteroid.erase(asteroid.begin()+h);
             Ship1->addScore();
         }
+    }
+}
+
+void game::spawnWave()
+{
+    for(int n = 0; n <= 3; n++) //Create vector of asteroids
+    {
+        asteroid.push_back(new asteroids());
+        Arena->addToScene(asteroid[n]);
     }
 }
 
@@ -127,10 +145,18 @@ void game::bulletUpdate()
 
 void game::textUpdate()
 {
-
     text[0]->displayInt(Ship1->getLife());
     text[1]->displayInt(Ship1->getScore());
+}
 
+void game::addBackground()
+{
+    QPixmap bgpixmap("C:/Users/Max Pettersson/Desktop/Skola/Objektorienterad mjukvaruutveckling/Projekt/bg.png");
+    //bgpixmap.scaled(QSize(200, 150));
+    background->setPixmap(bgpixmap);
+    background->setPos(-Arena->getWidth()/2, -Arena->getHeight()/2);
+
+    Arena->addToScene(background);
 }
 
 bool game::collisionDetectionAsteroid(asteroids *asteroid)

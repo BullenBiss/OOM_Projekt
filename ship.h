@@ -10,7 +10,7 @@
 //#include "bullet.h"
 
 
-class ship : public QGraphicsRectItem
+class ship : public QGraphicsPixmapItem
 {
 public:
     ship();
@@ -34,6 +34,8 @@ public:
 protected:
     int lives;
     int score;
+    int scaleX = 60;
+    int scaleY = 50;
     float acc = 0.6;
     float Vx = 0;       //V komposant
     float Vy = 0;       //V komposant
