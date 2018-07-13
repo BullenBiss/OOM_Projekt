@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <QProcess>
 #include <QDebug>
 #include <QObject>
 #include <QGraphicsScene>
@@ -42,6 +43,7 @@ private:
     double lifeTimer = 0;
     int wave = 1;
     bool shoot = false;
+    QTimer * timer = new QTimer();                              //Skapa timer
     arena *Arena = new arena();
     ship *Ship1 = new ship;     //Skapar ship som sen kan användas i hela game klassen
     ship *ghostShip = new ship;

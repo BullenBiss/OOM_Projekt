@@ -8,6 +8,7 @@ game::~game()
 {
     text.clear();
     asteroid.clear();
+    delete timer;
     delete Ship1;
     delete ghostShip;
     delete Bullet;
@@ -16,7 +17,6 @@ game::~game()
 
 void game::initiate()
 {
-    QTimer * timer = new QTimer();                              //Skapa timer
     connect(timer, SIGNAL(timeout()), this, SLOT(gameUpdate()));//Koppla till medlemmen update()
     timer->start(1000/60);
 
@@ -139,6 +139,7 @@ void game::shipUpdate()
     shootEvent();
     if(collisionDetectionShip(Ship1))
     {
+        Ship1->resetInput();
         Ship1->setActive(false);
         ghostShip->setFocus();
         Ship1->explosion();
@@ -164,6 +165,11 @@ void game::shipUpdate()
             text[2]->gameOver();
             Arena->addToScene(text[2]);
             ghostShip->setFocus();
+            if(ghostShip->escKey())
+            {
+                timer->stop();
+                this->~game();
+            }
         }
 
     }

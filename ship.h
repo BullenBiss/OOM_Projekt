@@ -33,6 +33,8 @@ public:
     void movement();
     void update();
     bool shoot();
+    bool escKey();
+    void resetInput();
     double getAngle();
     const float pi = 3.14159;
 protected:
@@ -54,6 +56,7 @@ protected:
     bool rotateLeft = false, rotateRight = false, forwardPress = false; //Knapptryckflaggor
     bool upRotateLeft = false, upRotateRight = false;
     bool shootPress = false;
+    bool escPress = false;
     float ax = 0;
     float ay = 0;
     float aB = 10.5;

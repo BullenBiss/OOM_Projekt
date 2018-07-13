@@ -39,7 +39,7 @@ void ship::keyPressEvent(QKeyEvent *event)                //Styr då knappen try
         }
         case Qt::Key_Escape:
         {
-            QApplication::quit();
+            escPress = true;
             break;
         }
     }
@@ -70,6 +70,11 @@ void ship::keyReleaseEvent(QKeyEvent *event)
     case Qt::Key_Control:
     {
         shootPress = false;
+        break;
+    }
+    case Qt::Key_Escape:
+    {
+        escPress = false;
         break;
     }
     }
@@ -230,7 +235,20 @@ double ship::getAngle()
     return returnAngle;
 }
 
+bool ship::escKey()
+{
+    return escPress;
+}
 
+void ship::resetInput()
+{
+    rotateLeft = false;
+    rotateRight = false;
+    forwardPress = false;
+    upRotateLeft = false;
+    upRotateRight = false;
+    shootPress = false;
+}
 void ship::update()
 {
     movement();

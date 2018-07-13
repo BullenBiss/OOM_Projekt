@@ -20,6 +20,7 @@ arena::~arena()
 void arena::create()
 {
     QGraphicsView * view = new QGraphicsView(scene);
+    view->setFixedSize(sceneWidth, sceneHeight);
     QRectF sceneRect(0,0,sceneWidth,sceneHeight);
     sceneRect.setCoords(-(sceneWidth/2), sceneHeight/2, sceneWidth/2, -(sceneHeight/2));    //Sätter origo i mitten av arenan istället för i hörnet.
 
