@@ -13,6 +13,7 @@ game::~game()
     delete ghostShip;
     delete Bullet;
     delete Arena;
+    delete s;
 }
 
 void game::initiate()
@@ -50,6 +51,7 @@ void game::initiate()
     ghostShip->setFlag(QGraphicsItem::ItemIsFocusable);
     ghostShip->setPos(-3000,-3000);
     Arena->addToScene(ghostShip);
+    s->soundInitiate();
 
 }
 
@@ -66,6 +68,7 @@ void game::shootEvent()
             }
             else if(!Bullet[i].active())
             {
+                s->makeSound("shoot");
                 Bullet[i].activate();
                 Bullet[i].setPos(Ship1->x()+20, Ship1->y()+12.5);
                 Bullet[i].bulletVelocity(Ship1->getVelocity());

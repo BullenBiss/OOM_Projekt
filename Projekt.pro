@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui \
+         multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -32,7 +33,8 @@ SOURCES += \
     gameobject.cpp \
     bullet.cpp \
     asteroids.cpp \
-    gametext.cpp
+    gametext.cpp \
+    sound.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +44,8 @@ HEADERS += \
     gameobject.h \
     bullet.h \
     asteroids.h \
-    gametext.h
+    gametext.h \
+    sound.h
 
 FORMS += \
         mainwindow.ui

@@ -10,6 +10,7 @@
 #include <QString>
 #include <vector>
 #include <QKeyEvent>
+#include "sound.h"
 #include "arena.h"
 #include "ship.h"
 #include "gameobject.h"
@@ -51,6 +52,7 @@ private:
     std::vector<asteroids*> asteroid;
     std::vector<gameText*> text;    //text[0] = lives, text[1] = score, text[2] = gameover
     QGraphicsPixmapItem * background = new QGraphicsPixmapItem;
+    sound *s = new sound;
 };
 
 #endif // GAME_H

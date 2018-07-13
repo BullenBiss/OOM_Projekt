@@ -1,5 +1,5 @@
 #include "asteroids.h"
-//test
+
 asteroids::asteroids()
 {
     _scaleX = 150;
