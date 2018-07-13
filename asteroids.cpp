@@ -23,7 +23,7 @@ asteroids::asteroids(int x, int y, int scaleX, int scaleY)
 
 void asteroids::spawnAsteroid()
 {
-    QPixmap pixmap("C:/Users/Max Pettersson/Desktop/Skola/Objektorienterad mjukvaruutveckling/Projekt/Asteroid.png");
+    QPixmap pixmap(":/new/images/Asteroid.png");
     QPixmap scaled = pixmap.scaled(QSize(_scaleX, _scaleY));
     this->setPixmap(scaled);
     this->randomVel();

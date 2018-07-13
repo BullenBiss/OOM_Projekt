@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/new/images">
+        <file>Asteroid.png</file>
+        <file>bg.png</file>
+        <file>Explosion.png</file>
+        <file>Spaceship.png</file>
+    </qresource>
+</RCC>

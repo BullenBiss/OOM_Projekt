@@ -61,7 +61,7 @@ protected:
     float ay = 0;
     float aB = 10.5;
     float h;
-    QPixmap *pixmap = new QPixmap("C:/Users/Max Pettersson/Desktop/Skola/Objektorienterad mjukvaruutveckling/Projekt/Spaceship.png");
+    QPixmap *pixmap = new QPixmap(":/new/images/Spaceship.png");
 };
 
 #endif // SHIP_H

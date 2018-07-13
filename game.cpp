@@ -197,7 +197,7 @@ void game::textUpdate()
 
 void game::addBackground()
 {
-    QPixmap bgpixmap("C:/Users/Max Pettersson/Desktop/Skola/Objektorienterad mjukvaruutveckling/Projekt/bg.png");
+    QPixmap bgpixmap(":/new/images/bg.png");
     //bgpixmap.scaled(QSize(200, 150));
     background->setPixmap(bgpixmap);
     background->setPos(-Arena->getWidth()/2, -Arena->getHeight()/2);

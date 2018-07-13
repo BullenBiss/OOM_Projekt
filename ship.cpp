@@ -213,7 +213,7 @@ void ship::resetVelocity()
 
 void ship::explosion()
 {
-    QPixmap explosionPix("C:/Users/Max Pettersson/Desktop/Skola/Objektorienterad mjukvaruutveckling/Projekt/Explosion.png");
+    QPixmap explosionPix(":/new/images/Explosion.png");
     explosionPix.scaled(QSize(20,20));
     this->setPixmap(explosionPix);
 }

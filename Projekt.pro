@@ -46,3 +46,6 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+RESOURCES += \
+    sprites.qrc
