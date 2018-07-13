@@ -4,15 +4,15 @@
 
 ship::ship()
 {
-    QPixmap pixmap("C:/Users/Max Pettersson/Desktop/Skola/Objektorienterad mjukvaruutveckling/Projekt/Spaceship.png");
-    QPixmap scaled = pixmap.scaled(QSize(scaleX, scaleY));
-    this->setPixmap(scaled);
-    this->setTransformOriginPoint(scaleX/2,scaleY/2);
     this->spawn();
     lives = 3;
     score = 0;
 }
 
+ship::~ship()
+{
+    delete pixmap;
+}
 void ship::keyPressEvent(QKeyEvent *event)                //Styr då knappen trycks in
 {
     switch(event->key())
@@ -32,7 +32,7 @@ void ship::keyPressEvent(QKeyEvent *event)                //Styr då knappen try
             forwardPress = true;
             break;
         }
-        case Qt::Key_Space:
+        case Qt::Key_Control:
         {
             shootPress = true;
             break;
@@ -67,7 +67,7 @@ void ship::keyReleaseEvent(QKeyEvent *event)
         rotateRight = false;
         break;
     }
-    case Qt::Key_Space:
+    case Qt::Key_Control:
     {
         shootPress = false;
         break;
@@ -77,7 +77,20 @@ void ship::keyReleaseEvent(QKeyEvent *event)
 
 void ship::spawn()
 {
+    QPixmap scaled = pixmap->scaled(QSize(scaleX, scaleY));
+    this->setPixmap(scaled);
+    this->setTransformOriginPoint(scaleX/2,scaleY/2);
     this->setPos(-500,0);
+}
+
+void ship::setActive(bool active)
+{
+    _active = active;
+}
+
+bool ship::active()
+{
+    return _active;
 }
 
 void ship::addLife()
@@ -191,6 +204,13 @@ void ship::resetVelocity()
 {
     VMx = 0;
     VMy = 0;
+}
+
+void ship::explosion()
+{
+    QPixmap explosionPix("C:/Users/Max Pettersson/Desktop/Skola/Objektorienterad mjukvaruutveckling/Projekt/Explosion.png");
+    explosionPix.scaled(QSize(20,20));
+    this->setPixmap(explosionPix);
 }
 
 bool ship::shoot()

@@ -39,10 +39,12 @@ public slots:
 private:
     double shotTimer = 0;
     double waveTimer = 0;
-    int wave;
+    double lifeTimer = 0;
+    int wave = 1;
     bool shoot = false;
     arena *Arena = new arena();
     ship *Ship1 = new ship;     //Skapar ship som sen kan användas i hela game klassen
+    ship *ghostShip = new ship;
     bullet *Bullet = new bullet[5];
     std::vector<asteroids*> asteroid;
     std::vector<gameText*> text;    //text[0] = lives, text[1] = score, text[2] = gameover

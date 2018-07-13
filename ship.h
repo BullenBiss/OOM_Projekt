@@ -14,10 +14,13 @@ class ship : public QGraphicsPixmapItem
 {
 public:
     ship();
+    ~ship();
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
     void velocityVector();
     void spawn();
+    void setActive(bool active);
+    bool active();
     void addLife();
     void addScore();
     int getScore();
@@ -26,6 +29,7 @@ public:
     int getLife();
     float getVelocity();
     void resetVelocity();
+    void explosion();
     void movement();
     void update();
     bool shoot();
@@ -36,6 +40,7 @@ protected:
     int score;
     int scaleX = 60;
     int scaleY = 50;
+    bool _active;
     float acc = 0.6;
     float Vx = 0;       //V komposant
     float Vy = 0;       //V komposant
@@ -53,6 +58,7 @@ protected:
     float ay = 0;
     float aB = 10.5;
     float h;
+    QPixmap *pixmap = new QPixmap("C:/Users/Max Pettersson/Desktop/Skola/Objektorienterad mjukvaruutveckling/Projekt/Spaceship.png");
 };
 
 #endif // SHIP_H

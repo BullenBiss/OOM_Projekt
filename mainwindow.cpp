@@ -12,3 +12,25 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+bool MainWindow::gameActive()
+{
+    return gameBool;
+}
+
+void MainWindow::on_PlayButton_clicked()
+{
+    gameBool = true;
+    Game.initiate();
+}
+
+void MainWindow::on_ExitButton_clicked()
+{
+    QApplication::quit();
+}
+
+void MainWindow::update()
+{
+    Game.gameUpdate();
+}
+

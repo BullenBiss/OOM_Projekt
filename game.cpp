@@ -1,9 +1,7 @@
 #include "game.h"
 game::game()
 {
-    QTimer * timer = new QTimer();                              //Skapa timer
-    connect(timer, SIGNAL(timeout()), this, SLOT(gameUpdate()));//Koppla till medlemmen update()
-    timer->start(1000/60);                                      //60fps typ
+
 }
 
 game::~game()
@@ -11,17 +9,22 @@ game::~game()
     text.clear();
     asteroid.clear();
     delete Ship1;
+    delete ghostShip;
     delete Bullet;
     delete Arena;
 }
 
 void game::initiate()
 {
-    qDebug() << "initiate";
+    QTimer * timer = new QTimer();                              //Skapa timer
+    connect(timer, SIGNAL(timeout()), this, SLOT(gameUpdate()));//Koppla till medlemmen update()
+    timer->start(1000/60);
+
     wave = 1;
     Arena->create();
     this->addBackground();
     Arena->addToScene(Ship1);
+    Arena->setStickyFocus(true);
 
     //this->spawnWave();
 
@@ -40,8 +43,14 @@ void game::initiate()
 
     text[3]->position(0,0);
 
+    Ship1->setActive(true);
     Ship1->setFlag(QGraphicsItem::ItemIsFocusable);
     Ship1->setFocus();
+    Ship1->setPanelModality(QGraphicsItem::SceneModal);
+    ghostShip->setFlag(QGraphicsItem::ItemIsFocusable);
+    ghostShip->setPos(-3000,-3000);
+    Arena->addToScene(ghostShip);
+
 }
 
 
@@ -130,21 +139,39 @@ void game::shipUpdate()
     shootEvent();
     if(collisionDetectionShip(Ship1))
     {
-        Ship1->looseLife();
+        Ship1->setActive(false);
+        ghostShip->setFocus();
+        Ship1->explosion();
+        Ship1->resetVelocity();
+        lifeTimer = 0;
+    }
+
+    if(!Ship1->active() && lifeTimer >= 100)
+    {
+
         Arena->removeFromScene(Ship1);
+
         if(Ship1->getLife() > 0)
         {
+            Ship1->looseLife();
             Ship1->spawn();
-            Ship1->resetVelocity();
             Arena->addToScene(Ship1);
+            Ship1->setActive(true);
             Ship1->setFocus();
         }
         else if (Ship1->getLife()==0)
         {
             text[2]->gameOver();
             Arena->addToScene(text[2]);
+            ghostShip->setFocus();
         }
+
     }
+    if(!Ship1->hasFocus() && Ship1->active())
+    {
+        Ship1->setFocus();
+    }
+
 }
 
 void game::bulletUpdate()
@@ -213,7 +240,7 @@ void game::gameUpdate()     //Timer som updaterar spelet.
     shipUpdate();
     bulletUpdate();
     shotTimer++;
+    lifeTimer++;
     asteroidUpdate();
-    qDebug() << Ship1->x();
     textUpdate();
 }
