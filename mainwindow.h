@@ -26,8 +26,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    game *Game;
     bool gameBool = false;
-    game Game;
+
 };
 
 #endif // MAINWINDOW_H

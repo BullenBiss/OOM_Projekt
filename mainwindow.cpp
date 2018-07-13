@@ -20,17 +20,17 @@ bool MainWindow::gameActive()
 
 void MainWindow::on_PlayButton_clicked()
 {
+    Game = new game;
     gameBool = true;
-    Game.initiate();
+    Game->initiate();
 }
 
 void MainWindow::on_ExitButton_clicked()
 {
-    QApplication::quit();
+    this->~MainWindow();
 }
 
 void MainWindow::update()
 {
-    Game.gameUpdate();
 }
 
