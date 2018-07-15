@@ -13,6 +13,7 @@ game::~game()
     delete ghostShip;
     delete Bullet;
     delete Arena;
+    delete s;
 }
 
 void game::initiate()
@@ -50,6 +51,7 @@ void game::initiate()
     ghostShip->setFlag(QGraphicsItem::ItemIsFocusable);
     ghostShip->setPos(-3000,-3000);
     Arena->addToScene(ghostShip);
+    s->soundInitiate();
 
 }
 
@@ -70,6 +72,7 @@ void game::shootEvent()
             }
             else if(!Bullet[i].active())
             {
+                s->soundShoot();
                 Bullet[i].activate();
                 Bullet[i].setPos(Ship1->x()+20, Ship1->y()+12.5);
                 Bullet[i].bulletVelocity(Ship1->getVelocity());
@@ -116,6 +119,7 @@ void game::asteroidUpdate()
         if(collisionDetectionAsteroid(asteroid[h]))
         {
             Arena->removeFromScene(asteroid[h]);
+            s->soundAsteroidExplosion();
             if(asteroid[h]->getScaleX() > 40)
             {
                 asteroid.push_back(new asteroids(asteroid[h]->x(), asteroid[h]->y(), asteroid[h]->getScaleX()/2, asteroid[h]->getScaleY()/2));
@@ -149,13 +153,13 @@ void game::shipUpdate()
         Ship1->explosion();
         Ship1->resetVelocity();
         lifeTimer = 0;
+        s->soundShipExplosion();
     }
 
     if(!Ship1->active() && lifeTimer >= 100)
     {
 
         Arena->removeFromScene(Ship1);
-
         if(Ship1->getLife() > 0)
         {
             Ship1->looseLife();

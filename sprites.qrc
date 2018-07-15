@@ -5,4 +5,9 @@
         <file>Explosion.png</file>
         <file>Spaceship.png</file>
     </qresource>
+    <qresource prefix="/sounds">
+        <file>../../shipExplosion.wav</file>
+        <file>../../asteroidExplosion.wav</file>
+        <file>../../shootSound.wav</file>
+    </qresource>
 </RCC>
