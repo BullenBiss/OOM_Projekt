@@ -27,6 +27,7 @@ public:
     ~game();
     void initiate();
     void keyPressEvent(QKeyEvent *event);
+    bool gameActive();
     void shootEvent();
     void asteroidUpdate();
     void spawnWave();
@@ -44,6 +45,7 @@ private:
     double lifeTimer = 0;
     int wave = 1;
     bool shoot = false;
+    bool exit = false;
     QTimer * timer = new QTimer();                              //Skapa timer
     arena *Arena = new arena();
     ship *Ship1 = new ship;     //Skapar ship som sen kan användas i hela game klassen

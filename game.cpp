@@ -55,6 +55,10 @@ void game::initiate()
 
 }
 
+bool game::gameActive()
+{
+    return exit;
+}
 
 void game::shootEvent()
 {
@@ -172,7 +176,9 @@ void game::shipUpdate()
             if(ghostShip->escKey())
             {
                 timer->stop();
+                Arena->hide();
                 this->~game();
+                return;
             }
         }
 
@@ -245,12 +251,16 @@ bool game::collisionDetectionShip(ship *ship)
 
 void game::gameUpdate()     //Timer som updaterar spelet.
 {
-    Arena->bounds(Ship1);
-    Ship1->update();
-    shipUpdate();
-    bulletUpdate();
-    shotTimer++;
-    lifeTimer++;
-    asteroidUpdate();
-    textUpdate();
+    if(!exit)
+    {
+        Arena->bounds(Ship1);
+        Ship1->update();
+        bulletUpdate();
+        shotTimer++;
+        lifeTimer++;
+        asteroidUpdate();
+        textUpdate();
+        shipUpdate();
+    }
+
 }

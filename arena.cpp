@@ -15,11 +15,12 @@ void arena::setResolution(int width, int height)
 arena::~arena()
 {
     delete scene;
+    delete view;
 }
 
 void arena::create()
 {
-    QGraphicsView * view = new QGraphicsView(scene);
+
     view->setFixedSize(sceneWidth, sceneHeight);
     QRectF sceneRect(0,0,sceneWidth,sceneHeight);
     sceneRect.setCoords(-(sceneWidth/2), sceneHeight/2, sceneWidth/2, -(sceneHeight/2));    //Sätter origo i mitten av arenan istället för i hörnet.
@@ -56,6 +57,11 @@ int arena::getWidth()
 int arena::getHeight()
 {
     return sceneHeight;
+}
+
+void arena::hide()
+{
+    view->setFixedSize(0,0);
 }
 
 void arena::addToScene(QGraphicsItem *item)
