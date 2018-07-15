@@ -27,7 +27,7 @@ void MainWindow::on_PlayButton_clicked()
 
 void MainWindow::on_ExitButton_clicked()
 {
-    this->~MainWindow();
+    QApplication::quit();
 }
 
 void MainWindow::update()
