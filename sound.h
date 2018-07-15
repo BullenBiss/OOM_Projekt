@@ -12,11 +12,14 @@ public:
     sound();
     void soundInitiate();
     void makeSound(string sound);
+    void soundShoot();
+    void soundAsteroidExplosion();
+    void soundShipExplosion();
 
 private:
-    QMediaPlayer * shootSound;
-    QMediaPlayer * asteroidExplosion;
-    QMediaPlayer * shipExplosion;
+    QMediaPlayer shootSound;
+    QMediaPlayer asteroidExplosion;
+    QMediaPlayer shipExplosion;
 };
 
 #endif // SOUND_H
