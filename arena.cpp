@@ -2,8 +2,8 @@
 
 arena::arena()
 {
-    sceneWidth = 1220;
-    sceneHeight = 680;
+    sceneWidth = 1920;
+    sceneHeight = 1080;
 }
 
 void arena::setResolution(int width, int height)

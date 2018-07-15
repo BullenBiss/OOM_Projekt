@@ -12,6 +12,7 @@ game::~game()
     delete Ship1;
     delete ghostShip;
     delete Bullet;
+    delete background;
     delete Arena;
     delete s;
 }
@@ -26,8 +27,6 @@ void game::initiate()
     this->addBackground();
     Arena->addToScene(Ship1);
     Arena->setStickyFocus(true);
-
-    //this->spawnWave();
 
     for(int i = 0; i <= 4; i++) //Create vector of text
     {
@@ -52,12 +51,6 @@ void game::initiate()
     ghostShip->setPos(-3000,-3000);
     Arena->addToScene(ghostShip);
     s->soundInitiate();
-
-}
-
-bool game::gameActive()
-{
-    return exit;
 }
 
 void game::shootEvent()
@@ -81,14 +74,6 @@ void game::shootEvent()
                 shotTimer = 0;
                 return;
             }
-        }
-    }
-
-    for(int j = 0; j <= 4; j++)
-    {
-        if(!Bullet[j].active())
-        {
-            //Arena->removeItem(&Bullet[j]);
         }
     }
 }
@@ -135,7 +120,7 @@ void game::asteroidUpdate()
 
 void game::spawnWave()
 {
-    for(int n = 0; n <= 3; n++) //Create vector of asteroids
+    for(int n = 0; n <= wave; n++) //Create vector of asteroids
     {
         asteroid.push_back(new asteroids());
         Arena->addToScene(asteroid[n]);
@@ -251,16 +236,14 @@ bool game::collisionDetectionShip(ship *ship)
 
 void game::gameUpdate()     //Timer som updaterar spelet.
 {
-    if(!exit)
-    {
-        Arena->bounds(Ship1);
-        Ship1->update();
-        bulletUpdate();
-        shotTimer++;
-        lifeTimer++;
-        asteroidUpdate();
-        textUpdate();
-        shipUpdate();
-    }
+
+       Arena->bounds(Ship1);
+       Ship1->update();
+       bulletUpdate();
+       shotTimer++;
+       lifeTimer++;
+       asteroidUpdate();
+       textUpdate();
+       shipUpdate();
 
 }

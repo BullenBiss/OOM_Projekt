@@ -26,25 +26,4 @@ void sound::soundShipExplosion()
 {
     shipExplosion.play();
 }
-void sound::makeSound(string sound)
-{
-
-    if(sound.compare("shoot"))
-    {
-        asteroidExplosion.play();
-    }
-    else if(sound.compare("asteroidExplosion"))
-    {
-
-    }
-    else if(sound.compare("shipExplosion"))
-    {
-        shipExplosion.play();
-    }
-    else
-    {
-        return;
-    }
-
-}
 

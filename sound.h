@@ -11,7 +11,6 @@ class sound: public QMediaPlayer
 public:
     sound();
     void soundInitiate();
-    void makeSound(string sound);
     void soundShoot();
     void soundAsteroidExplosion();
     void soundShipExplosion();

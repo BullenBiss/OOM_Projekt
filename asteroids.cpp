@@ -50,8 +50,8 @@ void asteroids::randomPos()
 
 void asteroids::randomVel()
 {
-    velocityX = (rand() % 4) - 2;
-    velocityY = (rand() % 4) - 2;
+    velocityX = (rand() % 6) - 3;
+    velocityY = (rand() % 6) - 3;
 
     if(velocityX == 0)
     {
@@ -66,7 +66,7 @@ void asteroids::randomVel()
 
 void asteroids::randomRot()
 {
-    _randRot = (rand() % 4) - 2;
+    _randRot = (rand() % 6) - 3;
 }
 void asteroids::update()
 {
