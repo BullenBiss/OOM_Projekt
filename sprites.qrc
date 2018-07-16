@@ -4,6 +4,11 @@
         <file>bg.png</file>
         <file>Explosion.png</file>
         <file>Spaceship.png</file>
+        <file>icons.svg</file>
+        <file>hp.png</file>
+        <file>shot.png</file>
+        <file>bulletSize.png</file>
+        <file>bulletVel.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>../../shipExplosion.wav</file>

@@ -17,7 +17,7 @@
 #include "bullet.h"
 #include "asteroids.h"
 #include "gametext.h"
-
+#include "powerup.h"
 
 class game : public QObject
 {
@@ -33,15 +33,21 @@ public:
     void shipUpdate();
     void bulletUpdate();
     void textUpdate();
+    void powerupUpdate();
     void addBackground();
     bool collisionDetectionAsteroid(asteroids *asteroid);
     bool collisionDetectionShip(ship *ship);
+    bool collisionDetectionPowerup(powerup *Power);
+    void resetValues();
 public slots:
     void gameUpdate();
 private:
     double shotTimer = 0;
     double waveTimer = 0;
     double lifeTimer = 0;
+    double powerupTimer = 0;
+    int bulletNr;
+    int shotLimit;
     int wave = 1;
     bool shoot = false;
     QTimer * timer = new QTimer();                              //Skapa timer
@@ -53,6 +59,7 @@ private:
     std::vector<gameText*> text;    //text[0] = lives, text[1] = score, text[2] = gameover
     QGraphicsPixmapItem * background = new QGraphicsPixmapItem;
     sound *s = new sound;
+    powerup *power = new powerup;
 };
 
 #endif // GAME_H

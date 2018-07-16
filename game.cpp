@@ -8,6 +8,7 @@ game::~game()
 {
     text.clear();
     asteroid.clear();
+    delete power;
     delete timer;
     delete Ship1;
     delete ghostShip;
@@ -47,19 +48,23 @@ void game::initiate()
     Ship1->setFlag(QGraphicsItem::ItemIsFocusable);
     Ship1->setFocus();
     Ship1->setPanelModality(QGraphicsItem::SceneModal);
+
     ghostShip->setFlag(QGraphicsItem::ItemIsFocusable);
     ghostShip->setPos(-3000,-3000);
     Arena->addToScene(ghostShip);
     s->soundInitiate();
+
+    shotLimit = 80;
+    bulletNr = 4;
 }
 
 void game::shootEvent()
 {
     if(Ship1->shoot())
     {
-        for(int i = 0; i <= 4; i++)
+        for(int i = 0; i <= bulletNr; i++)
         {
-            if(shotTimer < 40)
+            if(shotTimer < shotLimit)
             {
                 return;
             }
@@ -152,6 +157,7 @@ void game::shipUpdate()
             Arena->addToScene(Ship1);
             Ship1->setActive(true);
             Ship1->setFocus();
+            this->resetValues();
         }
         else if (Ship1->getLife()==0)
         {
@@ -182,6 +188,66 @@ void game::bulletUpdate()
         Bullet[j].update();
         Arena->bounds(&Bullet[j]);
     }
+}
+
+void game::powerupUpdate()
+{
+    if(collisionDetectionPowerup(power))
+    {
+        if(power->getId() == 1)
+        {
+            Ship1->addLife();
+            power->setActive(false);
+            Arena->removeFromScene(power);
+
+            powerupTimer = 0;
+        }
+        else if(power->getId() == 2)
+        {
+            shotLimit -= 10;
+            if(shotLimit < 10)
+            {
+                shotLimit = 10;
+            }
+
+            power->setActive(false);
+            Arena->removeFromScene(power);
+            powerupTimer = 0;
+        }
+        else if(power->getId() == 3)
+        {
+            for(int k = 0; k <= bulletNr; k++)
+            {
+                Bullet[k].setSize(Bullet[k].getSize() + 2);
+            }
+
+            power->setActive(false);
+            Arena->removeFromScene(power);
+            powerupTimer = 0;
+        }
+        else if(power->getId() == 4)
+        {
+            for(int k = 0; k <= bulletNr; k++)
+            {
+                Bullet[k].setVel(Bullet[k].getVel() + 2);
+            }
+            power->setActive(false);
+            Arena->removeFromScene(power);
+            powerupTimer = 0;
+        }
+    }
+
+   if(powerupTimer <= 500)
+   {
+       powerupTimer++;
+   }
+   else if(!power->active())
+   {
+       power->spawnPowerup();
+       power->setActive(true);
+       Arena->addToScene(power);
+   }
+
 }
 
 void game::textUpdate()
@@ -234,6 +300,32 @@ bool game::collisionDetectionShip(ship *ship)
     return false;
 }
 
+bool game::collisionDetectionPowerup(powerup *Power)
+{
+    QList<QGraphicsItem*> list = Power->collidingItems(); //Make a list of all items the asteroid collides with
+
+    for(int element = 0; element < list.size(); element++)
+    {
+        ship* power_cast = dynamic_cast<ship*>(list[element]);
+        if(power_cast)
+        {
+            return true;
+        }
+
+    }
+    return false;
+}
+
+void game::resetValues()
+{
+    for(int h = 0; h <= bulletNr; h++)
+    {
+        Bullet[h].setSize(10);
+        Bullet[h].setVel(6);
+    }
+    shotLimit = 80;
+}
+
 void game::gameUpdate()     //Timer som updaterar spelet.
 {
 
@@ -244,6 +336,7 @@ void game::gameUpdate()     //Timer som updaterar spelet.
        lifeTimer++;
        asteroidUpdate();
        textUpdate();
+       powerupUpdate();
        shipUpdate();
 
 }

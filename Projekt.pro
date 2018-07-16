@@ -34,7 +34,8 @@ SOURCES += \
     bullet.cpp \
     asteroids.cpp \
     gametext.cpp \
-    sound.cpp
+    sound.cpp \
+    powerup.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
     bullet.h \
     asteroids.h \
     gametext.h \
-    sound.h
+    sound.h \
+    powerup.h
 
 FORMS += \
         mainwindow.ui

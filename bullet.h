@@ -15,11 +15,18 @@ public:
     void activate();
     void deactivate();
     bool active();
+    void setSize(int newSize);
+    int getSize();
+    void setVel(int newVel);
+    int getVel();
+
     ~bullet();
 public slots:
     void update();
 private:
+    int size;
     double dt = 100;
+    double bulletAddVel;
     double bulletV = 0;
     double bulletX = 0;
     double bulletY = 0;
