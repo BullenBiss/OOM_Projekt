@@ -29,6 +29,7 @@ private:
     int sceneHeight;   //Lägger den här så att jag kan skapa en "addToScene" medlem
     QGraphicsScene * scene = new QGraphicsScene(0,0,1920,1080);
     QGraphicsView * view = new QGraphicsView(scene);
+    QScreen *screen = QGuiApplication::primaryScreen();
 };
 
 #endif // ARENA_H
