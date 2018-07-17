@@ -2,10 +2,17 @@
 
 powerup::powerup()
 {
-    _scale = 16;
+    _scale = 100;
     hpMap->scaled(QSize(_scale, _scale));
     shotMap->scaled(QSize(_scale, _scale));
+    bulletMap->scaled(QSize(_scale, _scale));
+    velMap->scaled(QSize(_scale, _scale));
+}
 
+powerup::powerup(int width, int height)
+{
+    _width = width;
+    _height = height;
 }
 
 powerup::~powerup()
@@ -34,7 +41,7 @@ void powerup::spawnPowerup()
     }
     else if(_id == 4)
     {
-        this->setPixmap(*shotMap);
+        this->setPixmap(*velMap);
     }
 
     this->randomPos();
@@ -42,8 +49,8 @@ void powerup::spawnPowerup()
 
 void powerup::randomPos()
 {
-    _X = (rand() % 1400) - 700;
-    _Y = (rand() % 600) - 300;
+    _X = (rand() % (_width-600)) - (_width-600)/2;
+    _Y = (rand() % (_height-400)) - (_height-400)/2;
     this->setPos(_X,_Y);
 }
 

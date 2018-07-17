@@ -204,8 +204,8 @@ void game::powerupUpdate()
         }
         else if(power->getId() == 2)
         {
-            shotLimit -= 10;
-            if(shotLimit < 10)
+            shotLimit -= 20;
+            if(shotLimit < 20)
             {
                 shotLimit = 10;
             }
@@ -218,7 +218,7 @@ void game::powerupUpdate()
         {
             for(int k = 0; k <= bulletNr; k++)
             {
-                Bullet[k].setSize(Bullet[k].getSize() + 2);
+                Bullet[k].setSize(Bullet[k].getSize() + 4);
             }
 
             power->setActive(false);
@@ -237,7 +237,7 @@ void game::powerupUpdate()
         }
     }
 
-   if(powerupTimer <= 500)
+   if(powerupTimer <= 1000)
    {
        powerupTimer++;
    }

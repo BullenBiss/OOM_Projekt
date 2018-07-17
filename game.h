@@ -59,7 +59,7 @@ private:
     std::vector<gameText*> text;    //text[0] = lives, text[1] = score, text[2] = gameover
     QGraphicsPixmapItem * background = new QGraphicsPixmapItem;
     sound *s = new sound;
-    powerup *power = new powerup;
+    powerup *power = new powerup(Arena->getWidth(), Arena->getHeight());
 };
 
 #endif // GAME_H
