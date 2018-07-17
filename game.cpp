@@ -14,8 +14,8 @@ game::~game()
     delete ghostShip;
     delete Bullet;
     delete background;
-    delete s;
     delete Arena;
+    delete s;
 }
 
 void game::initiate()
@@ -102,7 +102,7 @@ void game::asteroidUpdate()
         }
     }
 
-    for(unsigned int h = 0; h < asteroid.size(); h++)
+    for(int h = 0; h < asteroid.size(); h++)
     {
         asteroid[h]->update();
         Arena->bounds(asteroid[h]);
@@ -179,13 +179,6 @@ void game::shipUpdate()
         Ship1->setFocus();
     }
 
-    if(Ship1->escKey())
-    {
-        timer->stop();
-        Arena->hide();
-        this->~game();
-        return;
-    }
 }
 
 void game::bulletUpdate()

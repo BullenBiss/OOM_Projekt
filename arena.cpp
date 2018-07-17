@@ -4,8 +4,8 @@ arena::arena()
 {
 
     QRect screenGeometry = screen->geometry();
-    sceneWidth = screenGeometry.width() - 10;
-    sceneHeight = screenGeometry.height() - 75;
+    sceneWidth = screenGeometry.width();
+    sceneHeight = screenGeometry.height();
 }
 
 void arena::setResolution(int width, int height)
@@ -16,6 +16,7 @@ void arena::setResolution(int width, int height)
 
 arena::~arena()
 {
+    delete screen;
     delete scene;
     delete view;
 }
