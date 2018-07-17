@@ -14,5 +14,6 @@
         <file>../../shipExplosion.wav</file>
         <file>../../asteroidExplosion.wav</file>
         <file>../../shootSound.wav</file>
+        <file>../../PowerupSound.wav</file>
     </qresource>
 </RCC>

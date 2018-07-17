@@ -2,8 +2,11 @@
 
 arena::arena()
 {
-    sceneWidth = 1920;
-    sceneHeight = 1080;
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect screenGeometry = screen->geometry();
+    sceneWidth = screenGeometry.width();
+    sceneHeight = screenGeometry.height();
+
 }
 
 void arena::setResolution(int width, int height)

@@ -194,6 +194,7 @@ void game::powerupUpdate()
 {
     if(collisionDetectionPowerup(power))
     {
+        s->soundPowerup();
         if(power->getId() == 1)
         {
             Ship1->addLife();

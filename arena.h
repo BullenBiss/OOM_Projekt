@@ -6,6 +6,7 @@
 #include "ship.h"
 #include <QRectF>
 #include <QGraphicsItem>
+#include <QScreen>
 
 
 

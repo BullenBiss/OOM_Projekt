@@ -14,11 +14,13 @@ public:
     void soundShoot();
     void soundAsteroidExplosion();
     void soundShipExplosion();
+    void soundPowerup();
 
 private:
     QMediaPlayer shootSound;
     QMediaPlayer asteroidExplosion;
     QMediaPlayer shipExplosion;
+    QMediaPlayer powerupSound;
 };
 
 #endif // SOUND_H
