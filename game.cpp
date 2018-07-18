@@ -179,6 +179,13 @@ void game::shipUpdate()
         Ship1->setFocus();
     }
 
+    if(Ship1->escKey())
+    {
+        timer->stop();
+        Arena->hide();
+        this->~game();
+        return;
+    }
 }
 
 void game::bulletUpdate()
