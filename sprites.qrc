@@ -9,6 +9,7 @@
         <file>shot.png</file>
         <file>bulletSize.png</file>
         <file>bulletVel.png</file>
+        <file>startPage.jpg</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>../../shipExplosion.wav</file>
